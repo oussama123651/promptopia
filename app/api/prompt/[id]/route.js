@@ -9,17 +9,13 @@ export const GET = async (request, { params }) => {
     const prompt = await Prompt.findById(params.id).populate("creator");
     if (!prompt) return new Response("Prompt not found", { status: 404 });
 
-    return new Response(
-      JSON.stringify(prompt, {
-        status: 200,
-      })
-    );
+    return new Response(JSON.stringify(prompt), {
+      status: 200,
+    });
   } catch (error) {
-    return new Response(
-      JSON.stringify("Failed to fetch all prompts", {
-        status: 500,
-      })
-    );
+    return new Response("Failed to fetch all prompts", {
+      status: 500,
+    });
   }
 };
 
@@ -40,7 +36,7 @@ export const PATCH = async (request, { params }) => {
 
     await existingPrompt.save();
 
-    return new Response(JSON.stringify(existingPrompt, { status: 200 }));
+    return new Response("Successfully updated the Prompts", { status: 200 });
   } catch (error) {
     return new Response("Failed to update prompt", { status: 500 });
   }
